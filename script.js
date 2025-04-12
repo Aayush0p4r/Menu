@@ -61,12 +61,17 @@ const menu = {
 
 let cart = [];
 
+const GST_RATE = 0.12; // 12% GST
+
 function showCategory(category) {
     const content = document.getElementById('menu-content');
     content.innerHTML = '';
     content.classList.remove('fadeIn');
-    void content.offsetWidth; // Trigger reflow
+    void content.offsetWidth;
     content.classList.add('fadeIn');
+
+    document.body.className = '';
+    document.body.classList.add(category);
 
     menu[category].forEach(item => {
         const div = document.createElement('div');
@@ -88,18 +93,25 @@ function addToCart(name, price) {
 
 function updateCart() {
     const cartItems = document.getElementById('cart-items');
+    const cartSubtotal = document.getElementById('cart-subtotal');
+    const cartGst = document.getElementById('cart-gst');
     const cartTotal = document.getElementById('cart-total');
     cartItems.innerHTML = '';
-    let total = 0;
+    let subtotal = 0;
 
     cart.forEach(item => {
         const li = document.createElement('li');
         li.innerHTML = `${item.name} - ₹${item.price} <button onclick="removeFromCart('${item.name}'); event.stopPropagation()">Remove</button>`;
         cartItems.appendChild(li);
-        total += item.price;
+        subtotal += item.price;
     });
 
-    cartTotal.textContent = total;
+    const gst = subtotal * GST_RATE;
+    const total = subtotal + gst;
+
+    cartSubtotal.textContent = subtotal.toFixed(2);
+    cartGst.textContent = gst.toFixed(2);
+    cartTotal.textContent = total.toFixed(2);
 }
 
 function removeFromCart(name) {

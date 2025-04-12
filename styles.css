@@ -1,17 +1,40 @@
 body {
     font-family: 'Pacifico', cursive, Arial, sans-serif;
-    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
     color: #fff;
     margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    padding: 0;
+    height: 100vh;
     overflow-x: hidden;
+    transition: background-image 1s ease;
+}
+
+body.beverages {
+    background: url('image/bg_1.jpg') no-repeat center center fixed;
+}
+
+body.breakfast {
+    background: url('image/bg_2.png') no-repeat center center fixed;
+}
+
+body.main {
+    background: url('image/bg_3.png') no-repeat center center fixed;
+}
+
+body.desserts {
+    background: url('image/bg_4.jpg') no-repeat center center fixed;
+}
+
+body.combos {
+    background: url('image/bg_5.png') no-repeat center center fixed;
+}
+
+body, .beverages, .breakfast, .main, .desserts, .combos {
+    background-size: cover;
+    background-position: center;
 }
 
 .menu-container {
-    background: url('https://www.transparenttextures.com/patterns/coffee-beans.png');
+    background: rgba(0, 0, 0, 0.6);
     padding: 30px;
     border-radius: 15px;
     width: 80%;
@@ -19,6 +42,7 @@ body {
     text-align: center;
     box-shadow: 0 0 20px rgba(211, 166, 37, 0.5);
     position: relative;
+    margin: 20px auto;
     overflow: hidden;
 }
 
@@ -67,7 +91,7 @@ body {
 
 .menu-content {
     margin-top: 20px;
-    min-height: 300px;
+    min-height: 400px;
 }
 
 .menu-item {

@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brew & Bites Menu</title>
+    <title>Menu</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="menu-container">
-        <h1 class="menu-title">COFFEE <span>MENU</span></h1>
-        <p class="est animated fadeIn">est. 2025</p>
+        <h1 class="menu-title">CAFE <span>MENU</span></h1>
+        <p class="est animated fadeIn"></p>
         
         <div class="category-nav animated slideInDown">
             <button onclick="showCategory('beverages')" class="nav-btn">Beverages</button>
@@ -25,6 +25,8 @@
         <div class="cart animated bounceIn">
             <h2>Your Order</h2>
             <ul id="cart-items"></ul>
+            <p>Subtotal: ₹<span id="cart-subtotal">0</span></p>
+            <p>GST (12%): ₹<span id="cart-gst">0</span></p>
             <p>Total: ₹<span id="cart-total">0</span></p>
             <button onclick="clearCart()" class="clear-btn">Clear Cart</button>
         </div>
