@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.menu-container {
+    background: url('coffee-beans.png') repeat;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.menu-title {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.menu-title span {
+    color: #d3a625;
+}
+
+.est {
+    font-size: 0.8em;
+    color: #ccc;
+}
+
+.category-nav button {
+    background: #333;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.category-nav button:hover {
+    background: #555;
+}
+
+.menu-content {
+    margin-top: 20px;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px dashed #ccc;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background: #222;
+}
+
+.cart {
+    margin-top: 20px;
+    padding: 10px;
+    background: #222;
+    border-radius: 5px;
+}
+
+.cart ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cart li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.preview {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    color: #fff;
+}
+
+.preview.show {
+    display: block;
+}
+
+button {
+    background: #d3a625;
+    border: none;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #b78e1e;
+}
