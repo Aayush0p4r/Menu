@@ -35,14 +35,12 @@ body, .beverages, .breakfast, .main, .desserts, .combos {
     background: rgba(0, 0, 0, 0.6);
     padding: clamp(1rem, 3vw, 2rem);
     border-radius: 15px;
-    width: clamp(80%, 90vw, 95%);
+    width: clamp(80%, 90vw, 100%);
     height: clamp(90vh, 95vh, 100vh);
     text-align: center;
     box-shadow: 0 0 20px rgba(211, 166, 37, 0.5);
     overflow-y: auto;
     margin: clamp(0.5rem, 2vw, 1rem);
-    display: flex;
-    flex-direction: column;
 }
 
 body.light .menu-container {
@@ -160,6 +158,7 @@ body.light .nav-btn.active {
 .menu-content {
     margin-top: clamp(0.5rem, 2vw, 1rem);
     flex: 1;
+    overflow-y: auto;
     min-height: 200px;
 }
 
@@ -201,15 +200,20 @@ body.light .menu-item {
 }
 
 .cart {
-    margin-top: clamp(1rem, 3vw, 2rem);
+    margin-top: clamp(0.5rem, 2vw, 1rem);
     padding: clamp(1rem, 2vw, 1.5rem);
     background: linear-gradient(135deg, #222, #333);
     border-radius: 15px;
+    width: 100%;
+    box-sizing: border-box;border-top: 2px solid #d3a625;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
 }
 
 body.light .cart {
     background: linear-gradient(135deg, #ddd, #eee);
     color: #333;
+    border-top: 2px solid #b78e1e;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .cart h2 {
@@ -314,8 +318,8 @@ body.light .preview {
 /* Responsive Design */
 @media (max-width: 1024px) {
     .menu-container {
-        width: 95%;
-        height: 100vh;
+        width: 99%;
+        height: 99vh;
         margin: 0;
         border-radius: 0;
         padding: 1rem;
