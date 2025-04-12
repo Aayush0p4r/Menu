@@ -1,4 +1,4 @@
-// Menu data from previous response
+// Menu data (same as before)
 const menu = {
     beverages: [
         { name: "Americano", price: 150 },
@@ -64,11 +64,14 @@ let cart = [];
 function showCategory(category) {
     const content = document.getElementById('menu-content');
     content.innerHTML = '';
+    content.classList.remove('fadeIn');
+    void content.offsetWidth; // Trigger reflow
+    content.classList.add('fadeIn');
 
     menu[category].forEach(item => {
         const div = document.createElement('div');
         div.className = 'menu-item';
-        div.innerHTML = `${item.name} - ₹${item.price} <button onclick="addToCart('${item.name}', ${item.price})">Add</button>`;
+        div.innerHTML = `${item.name} - ₹${item.price} <button onclick="addToCart('${item.name}', ${item.price}); event.stopPropagation()">Add</button>`;
         div.onclick = () => showPreview(item.name);
         content.appendChild(div);
     });
@@ -77,6 +80,10 @@ function showCategory(category) {
 function addToCart(name, price) {
     cart.push({ name, price });
     updateCart();
+    const cartDiv = document.querySelector('.cart');
+    cartDiv.classList.remove('bounceIn');
+    void cartDiv.offsetWidth;
+    cartDiv.classList.add('bounceIn');
 }
 
 function updateCart() {
@@ -87,7 +94,7 @@ function updateCart() {
 
     cart.forEach(item => {
         const li = document.createElement('li');
-        li.innerHTML = `${item.name} - ₹${item.price} <button onclick="removeFromCart('${item.name}')">Remove</button>`;
+        li.innerHTML = `${item.name} - ₹${item.price} <button onclick="removeFromCart('${item.name}'); event.stopPropagation()">Remove</button>`;
         cartItems.appendChild(li);
         total += item.price;
     });
@@ -103,6 +110,10 @@ function removeFromCart(name) {
 function clearCart() {
     cart = [];
     updateCart();
+    const cartDiv = document.querySelector('.cart');
+    cartDiv.classList.remove('bounceIn');
+    void cartDiv.offsetWidth;
+    cartDiv.classList.add('bounceIn');
 }
 
 function showPreview(itemName) {
@@ -112,15 +123,17 @@ function showPreview(itemName) {
         case "Americano": description = "A strong black coffee with a rich, bold flavor."; break;
         case "Classic Pancakes (with Maple Syrup)": description = "Fluffy pancakes drizzled with sweet maple syrup."; break;
         case "Margherita Pizza (8-inch)": description = "Fresh tomato, mozzarella, and basil on a crispy base."; break;
-        // Add more descriptions as needed for other items
         default: description = "A delicious dish crafted with love!"; break;
     }
     preview.innerHTML = `<h3>${itemName}</h3><p>${description}</p><button onclick="hidePreview()">Close</button>`;
-    preview.classList.add('show');
+    preview.classList.remove('zoomIn');
+    void preview.offsetWidth;
+    preview.classList.add('zoomIn', 'show');
 }
 
 function hidePreview() {
-    document.getElementById('preview').classList.remove('show');
+    const preview = document.getElementById('preview');
+    preview.classList.remove('show', 'zoomIn');
 }
 
 // Show Beverages by default

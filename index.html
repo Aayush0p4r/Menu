@@ -5,30 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brew & Bites Menu</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="menu-container">
         <h1 class="menu-title">COFFEE <span>MENU</span></h1>
-        <p class="est">est. 2025</p>
+        <p class="est animated fadeIn">est. 2025</p>
         
-        <div class="category-nav">
-            <button onclick="showCategory('beverages')">Beverages</button>
-            <button onclick="showCategory('breakfast')">Breakfast & Snacks</button>
-            <button onclick="showCategory('main')">Main Course</button>
-            <button onclick="showCategory('desserts')">Desserts</button>
-            <button onclick="showCategory('combos')">Combos & Couple Specials</button>
+        <div class="category-nav animated slideInDown">
+            <button onclick="showCategory('beverages')" class="nav-btn">Beverages</button>
+            <button onclick="showCategory('breakfast')" class="nav-btn">Breakfast & Snacks</button>
+            <button onclick="showCategory('main')" class="nav-btn">Main Course</button>
+            <button onclick="showCategory('desserts')" class="nav-btn">Desserts</button>
+            <button onclick="showCategory('combos')" class="nav-btn">Combos & Couple Specials</button>
         </div>
 
-        <div class="menu-content" id="menu-content"></div>
+        <div class="menu-content animated fadeIn" id="menu-content"></div>
 
-        <div class="cart">
+        <div class="cart animated bounceIn">
             <h2>Your Order</h2>
             <ul id="cart-items"></ul>
             <p>Total: ₹<span id="cart-total">0</span></p>
-            <button onclick="clearCart()">Clear Cart</button>
+            <button onclick="clearCart()" class="clear-btn">Clear Cart</button>
         </div>
     </div>
-    <div id="preview" class="preview"></div>
+    <div id="preview" class="preview animated zoomIn"></div>
 
     <script src="script.js"></script>
 </body>
