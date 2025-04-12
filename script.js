@@ -60,8 +60,8 @@ const menu = {
 };
 
 let cart = [];
-
-const GST_RATE = 0.12; // 12% GST
+let isDarkTheme = true;
+const GST_RATE = 0.12;
 
 function showCategory(category) {
     const content = document.getElementById('menu-content');
@@ -70,20 +70,28 @@ function showCategory(category) {
     void content.offsetWidth;
     content.classList.add('fadeIn');
 
-    document.body.className = '';
-    document.body.classList.add(category);
+    document.body.className = isDarkTheme ? category : `light ${category}`;
 
     menu[category].forEach(item => {
         const div = document.createElement('div');
         div.className = 'menu-item';
-        div.innerHTML = `${item.name} - ₹${item.price} <button onclick="addToCart('${item.name}', ${item.price}); event.stopPropagation()">Add</button>`;
+        div.innerHTML = `
+            <span>${item.name} - ₹${item.price}</span>
+            <div class="quantity-selector">
+                <input type="number" id="qty-${item.name.replace(/\s+/g, '-')}" value="1" min="1">
+                <button onclick="addToCart('${item.name}', ${item.price}, document.getElementById('qty-${item.name.replace(/\s+/g, '-')}').value); event.stopPropagation()">Add</button>
+            </div>
+        `;
         div.onclick = () => showPreview(item.name);
         content.appendChild(div);
     });
 }
 
-function addToCart(name, price) {
-    cart.push({ name, price });
+function addToCart(name, price, quantity) {
+    quantity = parseInt(quantity) || 1;
+    for (let i = 0; i < quantity; i++) {
+        cart.push({ name, price });
+    }
     updateCart();
     const cartDiv = document.querySelector('.cart');
     cartDiv.classList.remove('bounceIn');
@@ -115,17 +123,39 @@ function updateCart() {
 }
 
 function removeFromCart(name) {
-    cart = cart.filter(item => item.name !== name);
+    const index = cart.findIndex(item => item.name === name);
+    if (index !== -1) {
+        cart.splice(index, 1);
+    }
     updateCart();
 }
 
 function clearCart() {
     cart = [];
     updateCart();
-    const cartDiv = document.querySelector('.cart');
-    cartDiv.classList.remove('bounceIn');
-    void cartDiv.offsetWidth;
-    cartDiv.classList.add('bounceIn');
+    showModal('Cart Cleared', 'Your cart has been cleared successfully.');
+}
+
+function placeOrder() {
+    if (cart.length === 0) {
+        showModal('Empty Cart', 'Please add items to your cart before placing an order.');
+        return;
+    }
+    showModal('Order Placed', 'Thank you for your order! It will be ready soon.');
+    cart = [];
+    updateCart();
+}
+
+function showModal(title, message) {
+    const modal = document.getElementById('modal');
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-message').textContent = message;
+    modal.classList.add('show');
+}
+
+function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.classList.remove('show');
 }
 
 function showPreview(itemName) {
@@ -147,6 +177,51 @@ function hidePreview() {
     const preview = document.getElementById('preview');
     preview.classList.remove('show', 'zoomIn');
 }
+
+function searchMenu() {
+    const query = document.getElementById('search-input').value.toLowerCase();
+    const content = document.getElementById('menu-content');
+    content.innerHTML = '';
+    content.classList.remove('fadeIn');
+    void content.offsetWidth;
+    content.classList.add('fadeIn');
+
+    let results = [];
+    for (let category in menu) {
+        menu[category].forEach(item => {
+            if (item.name.toLowerCase().includes(query)) {
+                results.push({ ...item, category });
+            }
+        });
+    }
+
+    if (results.length === 0) {
+        content.innerHTML = '<p>No items found.</p>';
+        return;
+    }
+
+    results.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'menu-item';
+        div.innerHTML = `
+            <span>${item.name} - ₹${item.price} (${item.category})</span>
+            <div class="quantity-selector">
+                <input type="number" id="qty-${item.name.replace(/\s+/g, '-')}" value="1" min="1">
+                <button onclick="addToCart('${item.name}', ${item.price}, document.getElementById('qty-${item.name.replace(/\s+/g, '-')}').value); event.stopPropagation()">Add</button>
+            </div>
+        `;
+        div.onclick = () => showPreview(item.name);
+        content.appendChild(div);
+    });
+}
+
+function toggleTheme() {
+    isDarkTheme = !isDarkTheme;
+    document.body.className = isDarkTheme ? document.body.className.replace('light', '') : `light ${document.body.className}`;
+}
+
+// Initialize theme toggle
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 
 // Show Beverages by default
 showCategory('beverages');

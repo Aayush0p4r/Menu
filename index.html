@@ -9,9 +9,16 @@
 </head>
 <body>
     <div class="menu-container">
-        <h1 class="menu-title">CAFE <span>MENU</span></h1>
-        <p class="est animated fadeIn"></p>
+        <div class="header-controls">
+            <h1 class="menu-title">CAFE <span>MENU</span></h1>
+            <button id="theme-toggle" class="theme-btn">Toggle Theme</button>
+        </div>
+        <p class="est animated fadeIn">Est. 2023</p>
         
+        <div class="search-bar animated fadeIn">
+            <input type="text" id="search-input" placeholder="Search menu items..." oninput="searchMenu()">
+        </div>
+
         <div class="category-nav animated slideInDown">
             <button onclick="showCategory('beverages')" class="nav-btn">Beverages</button>
             <button onclick="showCategory('breakfast')" class="nav-btn">Breakfast & Snacks</button>
@@ -29,9 +36,17 @@
             <p>GST (12%): ₹<span id="cart-gst">0</span></p>
             <p>Total: ₹<span id="cart-total">0</span></p>
             <button onclick="clearCart()" class="clear-btn">Clear Cart</button>
+            <button onclick="placeOrder()" class="order-btn">Place Order</button>
         </div>
     </div>
     <div id="preview" class="preview animated zoomIn"></div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title"></h3>
+            <p id="modal-message"></p>
+            <button onclick="closeModal()" class="modal-btn">Close</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
