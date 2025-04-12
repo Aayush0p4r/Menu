@@ -70,6 +70,15 @@ function showCategory(category) {
     void content.offsetWidth;
     content.classList.add('fadeIn');
 
+    // Update active button
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.category === category) {
+            btn.classList.add('active');
+        }
+    });
+
+    // Update body class
     document.body.className = isDarkTheme ? category : `light ${category}`;
 
     menu[category].forEach(item => {
@@ -186,6 +195,9 @@ function searchMenu() {
     void content.offsetWidth;
     content.classList.add('fadeIn');
 
+    // Clear active button when searching
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
     let results = [];
     for (let category in menu) {
         menu[category].forEach(item => {
@@ -217,7 +229,8 @@ function searchMenu() {
 
 function toggleTheme() {
     isDarkTheme = !isDarkTheme;
-    document.body.className = isDarkTheme ? document.body.className.replace('light', '') : `light ${document.body.className}`;
+    const currentCategory = document.body.className.replace('light', '').trim() || 'beverages';
+    document.body.className = isDarkTheme ? currentCategory : `light ${currentCategory}`;
 }
 
 // Initialize theme toggle
