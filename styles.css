@@ -21,10 +21,10 @@ body.light {
 }
 
 body.beverages { background: url('image/bg_1.jpg') no-repeat center center fixed; }
-body.breakfast { background: url('image/bg_2.png') no-repeat center center fixed; }
-body.main { background: url('image/bg_3.png') no-repeat center center fixed; }
+body.breakfast { background: url('image/bg_2.jpg') no-repeat center center fixed; }
+body.main { background: url('image/bg_3.jpg') no-repeat center center fixed; }
 body.desserts { background: url('image/bg_4.jpg') no-repeat center center fixed; }
-body.combos { background: url('image/bg_5.png') no-repeat center center fixed; }
+body.combos { background: url('image/bg_5.jpg') no-repeat center center fixed; }
 
 body, .beverages, .breakfast, .main, .desserts, .combos {
     background-size: cover;
@@ -315,6 +315,32 @@ body.light .preview {
     color: #333;
 }
 
+.preview-image-container {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto clamp(0.5rem, 2vw, 1rem);
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(211, 166, 37, 0.3);
+}
+
+.preview-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.preview-image:hover {
+    transform: scale(1.05);
+}
+
+body.light .preview-image-container {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .menu-container {
@@ -361,6 +387,10 @@ body.light .preview {
         width: 100%;
         max-width: 200px;
     }
+
+    .preview-image-container {
+        max-width: 200px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -380,6 +410,10 @@ body.light .preview {
 
     .cart {
         padding: clamp(0.8rem, 2vw, 1rem);
+    }
+
+    .preview-image-container {
+        max-width: 150px;
     }
 }
 
